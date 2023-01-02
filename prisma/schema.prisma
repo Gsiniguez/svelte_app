@@ -11,17 +11,13 @@ datasource db {
 }
 
 model User {
-  id Int @id @unique @default(autoincrement())
+  id        Int      @id @unique @default(autoincrement())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  state     String?  @default("Active")
 
-  name  String
-  posts Post[]
-}
+  email    String  @unique
+  password String?
 
-model Post {
-  id Int @id @unique @default(autoincrement())
-
-  title  String
-  body   String?
-  user   User?   @relation(fields: [userId], references: [id])
-  userId Int?
+  name String?
 }
